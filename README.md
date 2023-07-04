@@ -34,10 +34,14 @@ for path in "/var/lib/longhorn/replicas/"*/; do
     echo "docker run -d --rm --name $dir -v /dev:/host/dev -v /proc:/host/proc -v /var/lib/longhorn/replicas/$dir:/volume --privileged longhornio/longhorn-engine:v1.4.2 launch-simple-longhorn $dir $size"
           docker run -d --rm --name $dir -v /dev:/host/dev -v /proc:/host/proc -v /var/lib/longhorn/replicas/$dir:/volume --privileged longhornio/longhorn-engine:v1.4.2 launch-simple-longhorn $dir $size
     echo "---------------------------"
+    dev="/dev/longhorn/$dir"
     pvc="/home/$dir"
     mkdir $pvc
     umount $pvc
-    mount -o ro /dev/longhorn/$dir $pvc
+    while ! [ -b $dev ]; do
+        sleep 1
+    done
+    mount -o ro $dev $pvc
 done
 
 docker ps
