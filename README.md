@@ -23,9 +23,10 @@ if grep -qF "blacklist" "$multipath_conf"; then
     echo "Required content already exists in $multipath_conf."
 else
     echo 'blacklist { devnode "^sd[a-z0-9]+" }' >> "$multipath_conf"
-    systemctl restart multipathd.service
     echo "Added required content to $multipath_conf."
 fi
+
+systemctl restart multipathd.service
 
 for path in "/var/lib/longhorn/replicas/"*/; do
     echo "---------------------------"
