@@ -11,7 +11,6 @@ curl https://releases.rancher.com/install-docker/20.10.sh | sh
 apt install -y jq
 echo "---------------------------"
 docker stop $(docker ps -aq)
-echo "---------------------------"
 
 multipath_conf="/etc/multipath.conf"
 
@@ -29,6 +28,7 @@ else
 fi
 
 for path in "/var/lib/longhorn/replicas/"*/; do
+    echo "---------------------------"
     dir=$(basename "$path")
     meta="$path/volume.meta"
     size=$(jq '.Size' "$meta")
@@ -36,7 +36,6 @@ for path in "/var/lib/longhorn/replicas/"*/; do
     cat "$meta"
     echo "docker run -d --rm --name $dir -v /dev:/host/dev -v /proc:/host/proc -v /var/lib/longhorn/replicas/$dir:/volume --privileged longhornio/longhorn-engine:v1.4.2 launch-simple-longhorn $dir $size"
           docker run -d --rm --name $dir -v /dev:/host/dev -v /proc:/host/proc -v /var/lib/longhorn/replicas/$dir:/volume --privileged longhornio/longhorn-engine:v1.4.2 launch-simple-longhorn $dir $size
-    echo "---------------------------"
     dev="/dev/longhorn/$dir"
     pvc="/home/$dir"
     mkdir $pvc
