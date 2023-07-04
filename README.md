@@ -22,7 +22,7 @@ fi
 if grep -qF "blacklist" "$multipath_conf"; then
     echo "Required content already exists in $multipath_conf."
 else
-    echo "blacklist {\n devnode "^sd[a-z0-9]+" \n}" >> "$multipath_conf"
+    echo -e "blacklist {\n devnode "^sd[a-z0-9]+" \n}" >> "$multipath_conf"
     echo "Added required content to $multipath_conf."
 fi
 
