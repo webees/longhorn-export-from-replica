@@ -31,8 +31,8 @@ for path in "/var/lib/longhorn/replicas/"*/; do
     size=$(jq '.Size' "$meta")
     echo $dir $size
     cat "$meta"
-    echo "docker run -d --name $dir -v /depvc-122b6793-8171-4b6d-9364-29640dafc631-620c2e80v:/host/dev -v /proc:/host/proc -v /var/lib/longhorn/replicas/$dir:/volume --privileged longhornio/longhorn-engine:v1.4.2 launch-simple-longhorn $dir $size"
-    docker run -d --rm --name $dir -v /dev:/host/dev -v /proc:/host/proc -v /var/lib/longhorn/replicas/$dir:/volume --privileged longhornio/longhorn-engine:v1.4.2 launch-simple-longhorn $dir $size
+    echo "docker run -d --rm --name $dir -v /dev:/host/dev -v /proc:/host/proc -v /var/lib/longhorn/replicas/$dir:/volume --privileged longhornio/longhorn-engine:v1.4.2 launch-simple-longhorn $dir $size"
+          docker run -d --rm --name $dir -v /dev:/host/dev -v /proc:/host/proc -v /var/lib/longhorn/replicas/$dir:/volume --privileged longhornio/longhorn-engine:v1.4.2 launch-simple-longhorn $dir $size
     echo "---------------------------"
     pvc="/home/$dir"
     mkdir $pvc
