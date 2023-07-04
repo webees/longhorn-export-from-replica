@@ -9,6 +9,7 @@ curl https://releases.rancher.com/install-docker/20.10.sh | sh
 ```shell
 #!/bin/bash
 docker stop $(docker ps -aq)
+echo "---------------------------"
 
 multipath_conf="/etc/multipath.conf"
 
