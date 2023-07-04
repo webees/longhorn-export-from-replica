@@ -8,6 +8,8 @@ curl https://releases.rancher.com/install-docker/20.10.sh | sh
 
 ```shell
 #!/bin/bash
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
 
 multipath_conf="/etc/multipath.conf"
 
@@ -31,7 +33,7 @@ for path in "/var/lib/longhorn/replicas/"*/; do
     echo $dir $size
     cat "$meta"
     echo "docker run -d --name $dir -v /dev:/host/dev -v /proc:/host/proc -v /var/lib/longhorn/replicas/$dir:/volume --privileged longhornio/longhorn-engine:v1.4.2 launch-simple-longhorn $dir $size"
-    docker run -d --name $dir -v /dev:/host/dev -v /proc:/host/proc -v /var/lib/longhorn/replicas/$dir:/volume --privileged longhornio/longhorn-engine:v1.4.2 launch-simple-longhorn $dir $size
+    docker run -d --rm --name $dir -v /dev:/host/dev -v /proc:/host/proc -v /var/lib/longhorn/replicas/$dir:/volume --privileged longhornio/longhorn-engine:v1.4.2 launch-simple-longhorn $dir $size
     echo "---------------------------"
 done
 
