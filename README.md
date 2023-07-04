@@ -46,5 +46,6 @@ for path in "/var/lib/longhorn/replicas/"*/; do
     mount -o ro $dev $pvc
 done
 
+echo "---------------------------"
 docker ps
 ```
