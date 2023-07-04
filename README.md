@@ -8,6 +8,8 @@ curl https://releases.rancher.com/install-docker/20.10.sh | sh
 
 ```shell
 #!/bin/bash
+apt install -y jq
+echo "---------------------------"
 docker stop $(docker ps -aq)
 echo "---------------------------"
 
