@@ -14,6 +14,11 @@ apt install -y jq
 echo "---------------------------"
 docker stop $(docker ps -aq)
 
+umount -R /home
+
+find "/home" -mindepth 1 -maxdepth 1 -type d -name "pvc-*" -exec umount {} \;
+find "/home" -mindepth 1 -maxdepth 1 -type d -name "pvc-*" -exec rm -rf {} \;
+
 multipath_conf="/etc/multipath.conf"
 
 if [ ! -f "$multipath_conf" ]; then
@@ -42,7 +47,6 @@ for path in "/var/lib/longhorn/replicas/"*/; do
     dev="/dev/longhorn/$dir"
     pvc="/home/$dir"
     mkdir $pvc
-    umount $pvc
     while ! [ -b $dev ]; do
         sleep 1
     done
