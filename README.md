@@ -2,6 +2,8 @@ https://longhorn.io/docs/1.4.2/advanced-resources/data-recovery/export-from-repl
 
 https://longhorn.io/kb/troubleshooting-volume-with-multipath/
 
+https://github.com/longhorn/longhorn/wiki/Performance-Benchmark
+
 ```shell
 curl https://releases.rancher.com/install-docker/20.10.sh | sh
 ```
