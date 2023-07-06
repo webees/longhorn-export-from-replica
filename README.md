@@ -6,6 +6,8 @@ https://github.com/longhorn/longhorn/wiki/Performance-Benchmark
 
 ```shell
 curl https://releases.rancher.com/install-docker/20.10.sh | sh
+
+curl -sSfL https://raw.githubusercontent.com/longhorn/longhorn/v1.4.2/scripts/environment_check.sh | bash
 ```
 
 ```shell
