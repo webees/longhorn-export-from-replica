@@ -21,6 +21,19 @@ sudo rm -rf /var/lib/containerd
 ```
 # "There were many similar errors. Turn up verbosity to see them." err="orphaned pod \"4778d900-4bec-40ac-95ce-7578e6345677\" found, but error occurred when trying to remove the volumes dir: not a directory" numErrs=3
 /var/lib/kubelet/pods/$pod_id/volumes/kubernetes.io~csi/pvc_$pvc_id/
+
+while true ; do
+for o in $(tail /var/log/syslog | grep -o  -E 'orphaned pod \\"((\w|-)+)\\' | cut -d" " -f3 | grep -oE '(\w|-)+' | uniq); do
+    echo "orphaned pod: $o"
+	p="/var/lib/kubelet/pods/$o/volumes/kubernetes.io~csi"
+	if [ -d "$p" ] ; then
+	  echo "Removing $o"
+	  rm -rf "$p"
+	fi
+done
+done
+sleep 2
+done
 ```
 
 ```shell
