@@ -17,6 +17,12 @@ sudo rm -rf /var/lib/docker
 sudo rm -rf /var/lib/containerd
 ```
 
+# https://github.com/longhorn/longhorn/issues/3207
+```
+# "There were many similar errors. Turn up verbosity to see them." err="orphaned pod \"4778d900-4bec-40ac-95ce-7578e6345677\" found, but error occurred when trying to remove the volumes dir: not a directory" numErrs=3
+/var/lib/kubelet/pods/$pod_id/volumes/kubernetes.io~csi/pvc_$pvc_id/
+```
+
 ```shell
 #!/bin/bash
 apt install -y jq
