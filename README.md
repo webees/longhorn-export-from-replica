@@ -11,6 +11,13 @@ curl -sSfL https://raw.githubusercontent.com/longhorn/longhorn/v1.4.2/scripts/en
 ```
 
 ```shell
+sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
+```
+
+```shell
 #!/bin/bash
 apt install -y jq
 echo "---------------------------"
