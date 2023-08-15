@@ -86,7 +86,7 @@ docker ps
 ```
 
 [WARN]  multipathd is running
-```
+```shell
 #!/bin/bash
 apt install -y jq
 echo "---------------------------"
