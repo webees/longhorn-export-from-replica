@@ -84,3 +84,26 @@ done
 echo "---------------------------"
 docker ps
 ```
+
+[WARN]  multipathd is running
+```
+#!/bin/bash
+apt install -y jq
+echo "---------------------------"
+
+multipath_conf="/etc/multipath.conf"
+
+if [ ! -f "$multipath_conf" ]; then
+    touch "$multipath_conf"
+    echo "Created $multipath_conf."
+fi
+
+if grep -qF "blacklist" "$multipath_conf"; then
+    echo "Required content already exists in $multipath_conf."
+else
+    echo -e "blacklist {\n devnode "^sd[a-z0-9]+" \n}" >> "$multipath_conf"
+    echo "Added required content to $multipath_conf."
+fi
+
+systemctl restart multipathd.service
+```
